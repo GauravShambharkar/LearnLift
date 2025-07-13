@@ -1,8 +1,10 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-mongoose.connect();
+// const {databaseString} = require('./config')
 
+// mongoose.connect(databaseString);
+app.use(express.json());
 
 const userRoute = require("./routes/user");
 const adminRoute = require("./routes/admin");

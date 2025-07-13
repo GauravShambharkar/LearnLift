@@ -1,16 +1,18 @@
-const Router = require("express");
+const { Router } = require("express");
 const userRoute = Router();
 
-userRoute.get("/user", (req, res) => {
+const userMiddleware = require("../middleware/userMiddleware");
+
+userRoute.get("/signin", (req, res) => {
   res.send({
-    msg: "at user route",
+    msg: " user Sign in page",
   });
 });
 
-userRoute.post("/user", (req, res) => {
+userRoute.post("/signup", (req, res) => {
   const { user, email } = req.body;
   res.send({
-    msg: "posting from user route",
+    msg: "created a new user account",
   });
 });
 

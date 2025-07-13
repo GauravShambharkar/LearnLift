@@ -1,15 +1,15 @@
 const Router = require("express");
 const adminRoute = Router();
 
-adminRoute.get("admin", (req, res) => {
+adminRoute.get("/signin", (req, res) => {
   res.send({
-    message: "Welcome to admin page",
+    message: "admin Sign in page",
   });
 });
 
-adminRoute.post("admin", (req, res) => {
+adminRoute.post("/signup", (req, res) => {
   res.send({
-    message: "Welcome to admin page",
+    message: "created a new admin account",
   });
 });
 
