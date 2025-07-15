@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
 const userSchema = new schema({
-  userName: String,
+  name: String,
   email: String,
 });
 
 const adminSchema = new schema({
-  adminName: String,
+  name: String,
   email: String,
 });
 

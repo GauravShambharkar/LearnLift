@@ -1,18 +1,31 @@
 const { Router } = require("express");
 const userRoute = Router();
+const mongoose = require("mongoose");
+const { userModel } = require("../database/db");
 
 const userMiddleware = require("../middleware/userMiddleware");
 
-userRoute.get("/signin", (req, res) => {
+userRoute.get("/", (req, res) => {
   res.send({
-    msg: " user Sign in page",
+    msg: "Hello from user route",
   });
 });
 
-userRoute.post("/signup", (req, res) => {
-  const { user, email } = req.body;
+userRoute.post("/register", async (req, res) => {
+  const { name, email } = req.body;
+  await userModel.create({
+    name,
+    email,
+  });
+
   res.send({
-    msg: "created a new user account",
+    msg: "new user account createdd successfully ",
+  });
+});
+
+userRoute.post("/login", (req, res) => {
+  res.send({
+    msg: "user Sign in page",
   });
 });
 
