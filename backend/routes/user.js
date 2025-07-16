@@ -12,21 +12,39 @@ userRoute.get("/", (req, res) => {
 });
 
 userRoute.post("/register", async (req, res) => {
-  const { name, email } = req.body;
-  await userModel.create({
-    name,
-    email,
-  });
+  const { name, email, password } = req.body;
+
+  const user = await userModel.findOne({ email });
+
+  if (user) {
+    res.send({
+      msg: "user already exist",
+    });
+  } else {
+    await userModel.create({
+      name,
+      email,
+      password,
+    });
+  }
 
   res.send({
-    msg: "new user account createdd successfully ",
+    msg: "new user account created successfully ",
   });
 });
 
-userRoute.post("/login", (req, res) => {
-  res.send({
-    msg: "user Sign in page",
-  });
+userRoute.post("/login", async (req, res) => {
+  const { name, email, password } = req.body;
+  const user = await userModel.findOne({ password, email });
+  if (user) {
+    res.send({
+      msg: "login successfully",
+    });
+  } else {
+    res.send({
+      msg: "wrong user credential",
+    });
+  }
 });
 
 module.exports = userRoute;
