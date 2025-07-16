@@ -1,4 +1,5 @@
 const { userModel } = require("../database/db");
+const bcrypt = require("bcrypt");
 
 const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
@@ -26,7 +27,6 @@ const loginUser = async (req, res) => {
 
   const user = await userModel.findOne({
     email,
-    password,
   });
 
   if (user) {

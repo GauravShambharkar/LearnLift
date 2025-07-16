@@ -2,7 +2,6 @@ const { Router } = require("express");
 const userRoute = Router();
 const mongoose = require("mongoose");
 const { userModel } = require("../database/db");
-const bcrypt = require("bcrypt");
 const userMiddleware = require("../middleware/userMiddleware");
 const { registerUser, loginUser } = require("../controllers/userController");
 
