@@ -14,7 +14,7 @@ const registerUser = async (req, res) => {
     await userModel.create({
       name,
       email,
-      password,
+      password: bcrypt.hashSync(password, 10),
     });
     res.send({
       msg: "new user account created successfully",
@@ -30,9 +30,12 @@ const loginUser = async (req, res) => {
   });
 
   if (user) {
-    res.send({
-      msg: "login successfully",
-    });
+    let hashPass = await bcrypt.compare(password, user.password);
+    if (hashPass) {
+      res.send({
+        msg: "login successfully",
+      });
+    }
   } else {
     res.send({
       msg: "wrong user credential",
