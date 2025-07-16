@@ -2,8 +2,9 @@ const { Router } = require("express");
 const userRoute = Router();
 const mongoose = require("mongoose");
 const { userModel } = require("../database/db");
-
+const bcrypt = require("bcrypt");
 const userMiddleware = require("../middleware/userMiddleware");
+const { registerUser, loginUser } = require("../controllers/userController");
 
 userRoute.get("/", (req, res) => {
   res.send({
@@ -11,40 +12,8 @@ userRoute.get("/", (req, res) => {
   });
 });
 
-userRoute.post("/register", async (req, res) => {
-  const { name, email, password } = req.body;
+userRoute.post("/register", registerUser);
 
-  const user = await userModel.findOne({ email });
-
-  if (user) {
-    res.send({
-      msg: "user already exist",
-    });
-  } else {
-    await userModel.create({
-      name,
-      email,
-      password,
-    });
-  }
-
-  res.send({
-    msg: "new user account created successfully ",
-  });
-});
-
-userRoute.post("/login", async (req, res) => {
-  const { name, email, password } = req.body;
-  const user = await userModel.findOne({ password, email });
-  if (user) {
-    res.send({
-      msg: "login successfully",
-    });
-  } else {
-    res.send({
-      msg: "wrong user credential",
-    });
-  }
-});
+userRoute.post("/login", loginUser);
 
 module.exports = userRoute;
