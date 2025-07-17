@@ -1,5 +1,7 @@
+const { default: axios } = require("axios");
 const { userModel } = require("../database/db");
 const bcrypt = require("bcrypt");
+const { response } = require("express");
 
 const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
