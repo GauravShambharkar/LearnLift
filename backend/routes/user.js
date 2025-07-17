@@ -1,9 +1,13 @@
 const { Router } = require("express");
 const userRoute = Router();
 const mongoose = require("mongoose");
+const express = require("express");
+const app = express();
 const { userModel } = require("../database/db");
-const userMiddleware = require("../middleware/userMiddleware");
+const userLoginMiddleware = require("../middleware/userMiddleware");
 const { registerUser, loginUser } = require("../controllers/userController");
+
+app.use(userLoginMiddleware);
 
 userRoute.get("/", (req, res) => {
   res.send({
@@ -13,6 +17,6 @@ userRoute.get("/", (req, res) => {
 
 userRoute.post("/register", registerUser);
 
-userRoute.post("/login", loginUser);
+userRoute.post("/login", userLoginMiddleware, loginUser);
 
 module.exports = userRoute;

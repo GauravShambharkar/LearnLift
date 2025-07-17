@@ -23,24 +23,9 @@ const registerUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
-  const { email, password } = req.body;
-
-  const user = await userModel.findOne({
-    email,
+  res.send({
+    msg: "successfully login",
   });
-
-  if (user) {
-    let hashPass = await bcrypt.compare(password, user.password);
-    if (hashPass) {
-      res.send({
-        msg: "login successfully",
-      });
-    }
-  } else {
-    res.send({
-      msg: "wrong user credential",
-    });
-  }
 };
 
 const upgradeToCreator = async (req, res) => {
