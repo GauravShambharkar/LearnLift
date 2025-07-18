@@ -33,19 +33,36 @@ const loginUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const { email, New_name } = req.body;
 
-  const user = userModel.findOne({ email });
+  const user = await userModel.findOne({ email });
   if (user) {
-    const updatedUser = userModel.findOneAndUpdate(
+    const updatedUser = await userModel.findOneAndUpdate(
       { email },
       { name: New_name },
-      { new: true }
+      { new: true },
     );
     res.send(updatedUser);
-  } else
+  } else {
     res.send({
       msg: "user not found",
     });
+  }
 };
+
+const deleteUser = async (req, res) => {
+  const { email } = req.body;
+  
+  const user = await userModel.findOne({ email });
+  if (user) {
+    const deletedUser = await userModel.deleteOne(user)
+    res.send({
+      msg: "user deleted successfully",
+    });
+  } else {
+    res.send({
+      msg: "user not found",
+    });
+  }
+}
 
 const upgradeToCreator = async (req, res) => {
   const { email } = req.body;
@@ -66,4 +83,5 @@ module.exports = {
   loginUser,
   upgradeToCreator,
   updateUser,
+  deleteUser
 };

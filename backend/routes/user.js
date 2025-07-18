@@ -5,19 +5,27 @@ const express = require("express");
 const app = express();
 const { userModel } = require("../database/db");
 const userLoginMiddleware = require("../middleware/userMiddleware");
-const { registerUser, loginUser } = require("../controllers/userController");
+const {
+  registerUser,
+  loginUser,
+  updateUser,
+  deleteUser
+} = require("../controllers/userController");
 
 app.use(userLoginMiddleware);
 
-userRoute.get("/", (req, res) => {
+userRoute.get("/read", async (req, res) => {
+  const users = await userModel.find();
   res.send({
-    msg: "Hello from user route",
+    users,
+    // msg: "Hello from user route",
   });
 });
 
 userRoute.post("/register", registerUser);
 
 userRoute.post("/login", userLoginMiddleware, loginUser);
-userRoute.put("/updateUser", );
+userRoute.put("/updateUser", updateUser);
+userRoute.delete("/deleteUser", deleteUser);
 
 module.exports = userRoute;
