@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 const { userModel } = require("../database/db");
-const userLoginMiddleware = require("../middleware/userMiddleware");
+const {userLoginMiddleware, userDeleteMiddleware} = require("../middleware/userMiddleware");
+
 const {
   registerUser,
   loginUser,
@@ -26,6 +27,6 @@ userRoute.post("/register", registerUser);
 
 userRoute.post("/login", userLoginMiddleware, loginUser);
 userRoute.put("/updateUser", updateUser);
-userRoute.delete("/deleteUser", deleteUser);
+userRoute.delete("/deleteUser", userDeleteMiddleware, deleteUser);
 
 module.exports = userRoute;

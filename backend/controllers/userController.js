@@ -38,7 +38,7 @@ const updateUser = async (req, res) => {
     const updatedUser = await userModel.findOneAndUpdate(
       { email },
       { name: New_name },
-      { new: true },
+      { new: true }
     );
     res.send(updatedUser);
   } else {
@@ -49,20 +49,10 @@ const updateUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  const { email } = req.body;
-  
-  const user = await userModel.findOne({ email });
-  if (user) {
-    const deletedUser = await userModel.deleteOne(user)
-    res.send({
-      msg: "user deleted successfully",
-    });
-  } else {
-    res.send({
-      msg: "user not found",
-    });
-  }
-}
+  res.status(200).send({
+    msg: "user deleted successfully",
+  });
+};
 
 const upgradeToCreator = async (req, res) => {
   const { email } = req.body;
@@ -83,5 +73,5 @@ module.exports = {
   loginUser,
   upgradeToCreator,
   updateUser,
-  deleteUser
+  deleteUser,
 };

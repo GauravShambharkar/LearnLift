@@ -24,4 +24,18 @@ const userLoginMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = userLoginMiddleware;
+const userDeleteMiddleware = async (req, res, next) => {
+  const { email } = req.body;
+
+  const user = await userModel.findOne({ email });
+  if (user) {
+    await userModel.deleteOne(user);
+    next();
+  } else {
+    res.send({
+      msg: "user not found",
+    });
+  }
+};
+
+module.exports = { userLoginMiddleware, userDeleteMiddleware };
