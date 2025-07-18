@@ -18,5 +18,6 @@ userRoute.get("/", (req, res) => {
 userRoute.post("/register", registerUser);
 
 userRoute.post("/login", userLoginMiddleware, loginUser);
+userRoute.put("/updateUser", );
 
 module.exports = userRoute;

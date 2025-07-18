@@ -30,6 +30,23 @@ const loginUser = async (req, res) => {
   });
 };
 
+const updateUser = async (req, res) => {
+  const { email, New_name } = req.body;
+
+  const user = userModel.findOne({ email });
+  if (user) {
+    const updatedUser = userModel.findOneAndUpdate(
+      { email },
+      { name: New_name },
+      { new: true }
+    );
+    res.send(updatedUser);
+  } else
+    res.send({
+      msg: "user not found",
+    });
+};
+
 const upgradeToCreator = async (req, res) => {
   const { email } = req.body;
 
@@ -44,4 +61,9 @@ const upgradeToCreator = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser, upgradeToCreator };
+module.exports = {
+  registerUser,
+  loginUser,
+  upgradeToCreator,
+  updateUser,
+};
