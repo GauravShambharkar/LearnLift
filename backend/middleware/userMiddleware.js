@@ -28,7 +28,7 @@ const userLoginMiddleware = async (req, res, next) => {
 };
 
 const user_jwt_Verification_Middleware = async (req, res, next) => {
-  const token = req.header.token;
+  const token = req.body.token;
   const validUser = await jwt.verify(token, user_jwt_secret);
   if (validUser) {
     // res.send({
