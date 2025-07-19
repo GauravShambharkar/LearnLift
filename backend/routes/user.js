@@ -4,16 +4,21 @@ const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 const { userModel } = require("../database/db");
-const {userLoginMiddleware, userDeleteMiddleware} = require("../middleware/userMiddleware");
+const {
+  userLoginMiddleware,
+  userDeleteMiddleware,
+  userLoginMiddleware,
+  user_jwt_Verification_Middleware,
+} = require("../middleware/userMiddleware");
 
 const {
   registerUser,
   loginUser,
   updateUser,
-  deleteUser
+  deleteUser,
 } = require("../controllers/userController");
 
-app.use(userLoginMiddleware);
+app.use({ userLoginMiddleware, userLoginMiddleware });
 
 userRoute.get("/read", async (req, res) => {
   const users = await userModel.find();
@@ -26,6 +31,7 @@ userRoute.get("/read", async (req, res) => {
 userRoute.post("/register", registerUser);
 
 userRoute.post("/login", userLoginMiddleware, loginUser);
+userRoute.post("/login/auth", user_jwt_Verification_Middleware, loginUser);
 userRoute.put("/updateUser", updateUser);
 userRoute.delete("/deleteUser", userDeleteMiddleware, deleteUser);
 

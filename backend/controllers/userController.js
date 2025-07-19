@@ -1,7 +1,8 @@
 const { default: axios } = require("axios");
 const { userModel } = require("../database/db");
 const bcrypt = require("bcrypt");
-const { response } = require("express");
+const jwt = require("jsonwebtoken");
+const { user_jwt_secret } = require("../config");
 
 const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
@@ -25,9 +26,28 @@ const registerUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
-  res.send({
-    msg: "successfully login",
+  const { email, password } = req.body;
+
+  const user = await userModel.findOne({
+    email,
   });
+  let validUser = await bcrypt.compare(password, user.password);
+  if (validUser) {
+    const token = await jwt.sign({ id: user._id }, user_jwt_secret);
+    if (token) {
+      res.send({
+        token: validtoken,
+      });
+    } else {
+      res.status(401).send({
+        message: "wrong user password",
+      });
+    }
+  } else {
+    res.status(401).send({
+      msg: "wrong user credential",
+    });
+  }
 };
 
 const updateUser = async (req, res) => {
