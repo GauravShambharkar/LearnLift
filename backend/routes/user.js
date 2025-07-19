@@ -17,7 +17,6 @@ const {
   deleteUser,
 } = require("../controllers/userController");
 
-app.use(userLoginMiddleware, user_jwt_Verification_Middleware);
 
 userRoute.get("/read", async (req, res) => {
   const users = await userModel.find();
@@ -30,7 +29,7 @@ userRoute.get("/read", async (req, res) => {
 userRoute.post("/register", registerUser);
 
 userRoute.post("/login", userLoginMiddleware, loginUser);
-userRoute.post("/login/auth", user_jwt_Verification_Middleware, loginUser);
+userRoute.post("/login/token", user_jwt_Verification_Middleware, loginUser);
 
 userRoute.put("/updateUser", updateUser);
 userRoute.delete("/deleteUser", userDeleteMiddleware, deleteUser);

@@ -31,8 +31,8 @@ const loginUser = async (req, res) => {
   const user = await userModel.findOne({
     email,
   });
-  const isvalid = await bcrypt.compare(password, user.password);
-  if (isvalid) {
+  const validPass = await bcrypt.compare(password, user.password);
+  if (validPass) {
     const token = await jwt.sign({ id: user._id }, user_jwt_secret);
     if (token) {
       res.send({
