@@ -14,6 +14,7 @@ const adminRoute = require("./routes/admin");
 
 app.use("/user", userRoute);
 app.use("/admin", adminRoute);
+app.use("/course", adminRoute);
 
 // (async () => {
 //   const port = await getPort({ port: process.env.port || 3000 });

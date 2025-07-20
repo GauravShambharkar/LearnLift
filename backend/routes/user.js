@@ -18,7 +18,6 @@ const {
   jwtValid,
 } = require("../controllers/userController");
 
-
 userRoute.get("/read", async (req, res) => {
   const users = await userModel.find();
   res.send({
