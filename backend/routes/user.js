@@ -7,7 +7,7 @@ const { userModel } = require("../database/db");
 // middleware
 const { userLoginMiddleware, userDeleteMiddleware, user_jwt_Verification_Middleware,} = require("../middleware/userMiddleware");
 // controllers
-const { registerUser, loginUser, updateUser, deleteUser, jwtValid, } = require("../controllers/userController");
+const { registerUser, loginUser, updateUser, deleteUser, user_jwtValid, } = require("../controllers/userController");
 
 userRoute.get("/read", async (req, res) => {
   const users = await userModel.find();
@@ -21,7 +21,7 @@ userRoute.get("/read", async (req, res) => {
 
 userRoute.post("/register", registerUser);
 userRoute.post("/login", userLoginMiddleware, loginUser);
-userRoute.post("/login/token", user_jwt_Verification_Middleware, jwtValid);
+userRoute.post("/login/token", user_jwt_Verification_Middleware, user_jwtValid);
 userRoute.put("/updateUser", updateUser);
 userRoute.delete("/deleteUser", userDeleteMiddleware, deleteUser);
 
