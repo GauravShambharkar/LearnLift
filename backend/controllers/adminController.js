@@ -46,6 +46,30 @@ const admin_jwtValid = (req, res) => {
   });
 };
 
+const updateAdmin = async (req, res) => {
+  const { New_name, New_email } = req.body;
+
+  const user = await adminModel.findOne({ email });
+  if (user) {
+    const updated_Admin = await userModel.findOneAndUpdate(
+      { email },
+      { name: New_name, email: New_email },
+      { new: true }
+    );
+    res.send(updated_Admin);
+  } else {
+    res.send({
+      msg: "admin not found",
+    });
+  }
+};
+
+const deleteAdmin = async (req, res) => {
+  res.send({
+    msg: "Admin deleted successfully",
+  });
+};
+
 // const createCourse = async (req, res) => {
 //   const { title, description, demos, price, creatorEmail } = req.body;
 
@@ -74,4 +98,10 @@ const admin_jwtValid = (req, res) => {
 //   }
 // };
 
-module.exports = { registerAdmin, loginAdmin, admin_jwtValid };
+module.exports = {
+  registerAdmin,
+  loginAdmin,
+  admin_jwtValid,
+  updateAdmin,
+  deleteAdmin,
+};

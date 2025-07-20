@@ -34,4 +34,20 @@ const admin_jwt_Verification_Middleware = async (req, res, next) => {
   }
 };
 
-module.exports = { adminLoginMiddleware, admin_jwt_Verification_Middleware };
+const delete_admin_Middeleware = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  const admin = await adminModel.findOneAndDelete({ email });
+  const valid_Admin = await bcrypt.compare(password, admin.password);
+  if (admin) {
+    if (valid_Admin) {
+      res.send({ msg: "Admin deleted successfully" });
+    } else {
+      res.status(401).send({ msg: "Invalid password" });
+    }
+  } else {
+    res.status(401).send({ msg: "Admin not found" });
+  }
+};
+
+module.exports = { adminLoginMiddleware, admin_jwt_Verification_Middleware , delete_admin_Middeleware};

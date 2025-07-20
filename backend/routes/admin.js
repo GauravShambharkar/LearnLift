@@ -1,19 +1,35 @@
 const Router = require("express");
-const { adminModel } = require("../database/db");
-const { loginAdmin, registerAdmin, admin_jwtValid } = require("../controllers/adminController");
-const { adminLoginMiddleware, admin_jwt_Verification_Middleware } = require("../middleware/adminMiddleware");
-const { jwtValid } = require("../controllers/userController");
 const adminRoute = Router();
+const { adminModel } = require("../database/db");
+const {
+  loginAdmin,
+  registerAdmin,
+  admin_jwtValid,
+  updateAdmin,
+  deleteAdmin,
+} = require("../controllers/adminController");
+const {
+  adminLoginMiddleware,
+  admin_jwt_Verification_Middleware,
+  delete_admin_Middeleware,
+} = require("../middleware/adminMiddleware");
 
 adminRoute.get("/read", async (req, res) => {
   const adminData = await adminModel.find();
   res.send({
-    adminData,
+    adminData: adminData,
   });
 });
 
 adminRoute.post("/register", registerAdmin);
 adminRoute.post("/login", adminLoginMiddleware, loginAdmin);
-adminRoute.post("/login/token", admin_jwt_Verification_Middleware, admin_jwtValid);
+adminRoute.post(
+  "/login/token",
+  admin_jwt_Verification_Middleware,
+  admin_jwtValid
+);
+
+adminRoute.put("/updateAdmin", updateAdmin);
+adminRoute.delete("/deleteAdmin", delete_admin_Middeleware, deleteAdmin);
 
 module.exports = adminRoute;

@@ -11,10 +11,11 @@ app.use(cors());
 
 const userRoute = require("./routes/user");
 const adminRoute = require("./routes/admin");
+const courseRoute = require("./routes/course");
 
 app.use("/user", userRoute);
 app.use("/admin", adminRoute);
-app.use("/course", adminRoute);
+app.use("/course", courseRoute);
 
 // (async () => {
 //   const port = await getPort({ port: process.env.port || 3000 });

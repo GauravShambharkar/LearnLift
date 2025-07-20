@@ -1,9 +1,12 @@
 const router = require("express");
-const adminRoute = router();
+const courseRoute = router();
 // admin route
 
 const adminRoute = require("./admin");
 
-adminRoute.get("/read");
-adminRoute.post("/register");
-adminRoute.post("/login");
+// adminRoute.get("/read");
+// adminRoute.post("/register");
+// adminRoute.post("/login");
+
+
+module.exports = courseRoute

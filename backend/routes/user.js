@@ -12,7 +12,7 @@ const { registerUser, loginUser, updateUser, deleteUser, user_jwtValid, } = requ
 userRoute.get("/read", async (req, res) => {
   const users = await userModel.find();
   res.send({
-    users,
+    userData : users,
     // msg: "Hello from user route",
   });
 });
