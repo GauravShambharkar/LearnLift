@@ -15,6 +15,7 @@ const {
   loginUser,
   updateUser,
   deleteUser,
+  jwtValid,
 } = require("../controllers/userController");
 
 
@@ -29,7 +30,7 @@ userRoute.get("/read", async (req, res) => {
 userRoute.post("/register", registerUser);
 
 userRoute.post("/login", userLoginMiddleware, loginUser);
-userRoute.post("/login/token", user_jwt_Verification_Middleware, loginUser);
+userRoute.post("/login/token", user_jwt_Verification_Middleware, jwtValid);
 
 userRoute.put("/updateUser", updateUser);
 userRoute.delete("/deleteUser", userDeleteMiddleware, deleteUser);
