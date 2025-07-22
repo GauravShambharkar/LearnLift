@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useRef } from "react";
 import cors from "cors";
 
-const form = () => {
-  const [user, setUser] = useState();
+const Registerform = () => {
+  const [user, setUser] = useState("");
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +18,16 @@ const form = () => {
 
     console.log(user);
   };
+
+  const handleDelete = async (e) => {
+    await fetch("http://localhost:3000/user/deleteUser", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user.email),
+    });
+  }
 
   return (
     <>
@@ -38,9 +48,10 @@ const form = () => {
           placeholder="password"
         />
         <button type="submit">submit</button>
+        <button onClick={handleDelete} type="submit">delete</button>
       </form>
     </>
   );
 };
 
-export default form;
+export default Registerform;

@@ -6,17 +6,17 @@ const cors = require("cors");
 const { databaseString } = require("./config");
 
 mongoose.connect(databaseString);
-app.use(express.json());
 
 var corsOptions = {
-  origin: " http://localhost:5173/",
-  METHODS: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  origin: ["http://localhost:5173"],
+  METHODS: ["GET,HEAD,PUT,PATCH,POST,DELETE"],
   Credential: true,
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
 const { METHODS } = require("node:http");
 app.use(cors(corsOptions));
+app.use(express.json());
 
 const userRoute = require("./routes/user");
 const adminRoute = require("./routes/admin");
