@@ -3,7 +3,11 @@ import { useRef } from "react";
 import cors from "cors";
 
 const Registerform = () => {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -25,30 +29,33 @@ const Registerform = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(user.email),
+      body: JSON.stringify({email: user.email, password: user.password}),
     });
-  }
+    console.log("user deleted");
+  };
 
   return (
     <>
       <form action="" onSubmit={handleFormSubmit}>
         <input
-          onChange={(e) => setUser({ name: e.target.value })}
+          onChange={(e) => setUser({ ...user, name: e.target.value })}
           type="text"
           placeholder="name"
         />
         <input
-          onChange={(e) => setUser({ email: e.target.value })}
+          onChange={(e) => setUser({ ...user, email: e.target.value })}
           type="text"
           placeholder="email"
         />
         <input
-          onChange={(e) => setUser({ password: e.target.value })}
+          onChange={(e) => setUser({ ...user, password: e.target.value })}
           type="text"
           placeholder="password"
         />
         <button type="submit">submit</button>
-        <button onClick={handleDelete} type="submit">delete</button>
+        <button onClick={handleDelete} type="button">
+          delete
+        </button>
       </form>
     </>
   );
