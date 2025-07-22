@@ -21,15 +21,16 @@ const Registerform = () => {
     });
 
     console.log(user);
+    e.target.reset();
   };
 
-  const handleDelete = async (e) => {
+  const handleDelete = async (email, password) => {
     await fetch("http://localhost:3000/user/deleteUser", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({email: user.email, password: user.password}),
+      body: JSON.stringify({ email, password }),
     });
     console.log("user deleted");
   };
@@ -53,7 +54,12 @@ const Registerform = () => {
           placeholder="password"
         />
         <button type="submit">submit</button>
-        <button onClick={handleDelete} type="button">
+        <button
+          onClick={() => {
+            handleDelete(user.email, user.password);
+          }}
+          type="button"
+        >
           delete
         </button>
       </form>
