@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const { user_jwt_secret } = require("../config");
 
 const registerUser = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, role } = req.body;
 
   const user = await userModel.findOne({ email });
 
@@ -18,6 +18,7 @@ const registerUser = async (req, res) => {
       name,
       email,
       password: bcrypt.hashSync(password, 10),
+      role
     });
     res.send({
       msg: "new user account created successfully",

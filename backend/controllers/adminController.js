@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const { admin_jwt_secret } = require("../config");
 
 const registerAdmin = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password , role} = req.body;
 
   const admin = await adminModel.findOne({ email });
 
@@ -17,6 +17,7 @@ const registerAdmin = async (req, res) => {
       name,
       email,
       password: await bcrypt.hash(password, 10),
+      role
     });
     res.send({
       msg: "new admin account created successfully",
