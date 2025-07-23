@@ -18,9 +18,9 @@ const { METHODS } = require("node:http");
 app.use(cors(corsOptions));
 app.use(express.json());
 
-const userRoute = require("./routes/user");
-const adminRoute = require("./routes/admin");
-const courseRoute = require("./routes/course");
+const userRoute = require("./routes/userRoute");
+const adminRoute = require("./routes/adminRoute");
+const courseRoute = require("./routes/courseRoute");
 
 app.use("/user", userRoute);
 app.use("/admin", adminRoute);
