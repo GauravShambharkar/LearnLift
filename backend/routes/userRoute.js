@@ -2,18 +2,28 @@ const { Router } = require("express");
 const userRoute = Router();
 const mongoose = require("mongoose");
 const express = require("express");
-const { userModel } = require("../Models/db");
+const { userModel } = require("../models/db");
 
 // middleware
-const { userLoginMiddleware, userDeleteMiddleware, user_jwt_Verification_Middleware,} = require("../middleware/userMiddleware");
+const {
+  userLoginMiddleware,
+  userDeleteMiddleware,
+  user_jwt_Verification_Middleware,
+} = require("../middleware/userMiddleware");
 // controllers
-const { registerUser, loginUser, updateUser, deleteUser, user_jwtValid, } = require("../controllers/userController");
+const {
+  registerUser,
+  loginUser,
+  updateUser,
+  deleteUser,
+  user_jwtValid,
+} = require("../controllers/userController");
 
 userRoute.get("/read", async (req, res) => {
   const users = await userModel.find();
   res.send({
-    userData : users,
-  }); 
+    userData: users,
+  });
 });
 
 // user route

@@ -1,5 +1,5 @@
 const { admin_jwt_secret } = require("../config");
-const { adminModel } = require("../Models/db");
+const { adminModel } = require("../models/db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 

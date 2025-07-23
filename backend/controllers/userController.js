@@ -1,5 +1,5 @@
 const { default: axios } = require("axios");
-const { userModel } = require("../Models/db");
+const { userModel } = require("../models/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { user_jwt_secret } = require("../config");
@@ -18,7 +18,7 @@ const registerUser = async (req, res) => {
       name,
       email,
       password: bcrypt.hashSync(password, 10),
-      role
+      role,
     });
     res.send({
       msg: "new user account created successfully",
