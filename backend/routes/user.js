@@ -2,7 +2,7 @@ const { Router } = require("express");
 const userRoute = Router();
 const mongoose = require("mongoose");
 const express = require("express");
-const { userModel } = require("../database/db");
+const { userModel } = require("../Models/db");
 
 // middleware
 const { userLoginMiddleware, userDeleteMiddleware, user_jwt_Verification_Middleware,} = require("../middleware/userMiddleware");
@@ -14,7 +14,7 @@ userRoute.get("/read", async (req, res) => {
   res.send({
     userData : users,
     // msg: "Hello from user route",
-  });
+  }); 
 });
 
 // user route

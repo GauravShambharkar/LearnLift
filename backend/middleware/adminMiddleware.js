@@ -1,5 +1,5 @@
 const { admin_jwt_secret } = require("../config");
-const { adminModel } = require("../database/db");
+const { adminModel } = require("../Models/db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
@@ -50,4 +50,8 @@ const delete_admin_Middeleware = async (req, res, next) => {
   }
 };
 
-module.exports = { adminLoginMiddleware, admin_jwt_Verification_Middleware , delete_admin_Middeleware};
+module.exports = {
+  adminLoginMiddleware,
+  admin_jwt_Verification_Middleware,
+  delete_admin_Middeleware,
+};

@@ -1,5 +1,5 @@
 const { default: axios } = require("axios");
-const { userModel } = require("../database/db");
+const { userModel } = require("../Models/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { user_jwt_secret } = require("../config");
@@ -50,13 +50,11 @@ const loginUser = async (req, res) => {
   }
 };
 
-
 const user_jwtValid = (req, res) => {
   res.send({
     msg: "Token is valid",
   });
 };
-
 
 const updateUser = async (req, res) => {
   const { email, New_name } = req.body;

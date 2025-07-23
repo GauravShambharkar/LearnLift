@@ -1,6 +1,6 @@
 const Router = require("express");
 const adminRoute = Router();
-const { adminModel } = require("../database/db");
+const { adminModel } = require("../Models/db");
 const { loginAdmin, registerAdmin, admin_jwtValid,updateAdmin,deleteAdmin,} = require("../controllers/adminController");
 const { adminLoginMiddleware, admin_jwt_Verification_Middleware, delete_admin_Middeleware,} = require("../middleware/adminMiddleware");
 
