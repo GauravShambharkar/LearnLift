@@ -3,6 +3,7 @@ const { userModel } = require("../Models/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { user_jwt_secret } = require("../config");
+const { generateUserToken } = require("../utils");
 
 const registerUser = async (req, res) => {
   const { name, email, password, role } = req.body;
@@ -34,7 +35,8 @@ const loginUser = async (req, res) => {
   });
   const validPass = await bcrypt.compare(password, user.password);
   if (validPass) {
-    const token = await jwt.sign({ id: user._id }, user_jwt_secret);
+    // const token = await jwt.sign({ id: user._id }, user_jwt_secret);
+    const token = await generateUserToken({id: user._id, }, user_jwt_secret);
     if (token) {
       res.send({
         token: token,
