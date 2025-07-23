@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const { user_jwt_secret, admin_jwt_secret } = require("./config");
 
 const generateUserToken = (payload) => {
-  return jwt.sign(payload, user_jwt_secret, { expiresIn });
+  return jwt.sign(payload, user_jwt_secret);
 };
 
 const verifyUserToken = (token) => {

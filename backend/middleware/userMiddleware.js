@@ -2,6 +2,7 @@ const { userModel } = require("../Models/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { user_jwt_secret } = require("../config");
+const { verifyUserToken } = require("../utils");
 
 const userLoginMiddleware = async (req, res, next) => {
   try {
@@ -29,7 +30,8 @@ const userLoginMiddleware = async (req, res, next) => {
 
 const user_jwt_Verification_Middleware = async (req, res, next) => {
   const token = req.body.token;
-  const validUser = await jwt.verify(token, user_jwt_secret);
+  // const validUser = await jwt.verify(token, user_jwt_secret);
+  const validUser = await verifyUserToken(token);
   if (validUser) {
     // res.send({
     //   msg: "valid token",
