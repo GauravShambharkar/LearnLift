@@ -6,15 +6,26 @@ const { admin_jwt_secret } = require("../config");
 const registerAdmin = async (req, res) => {
   const { name, email, password } = req.body;
 
-  await adminModel.create({
-    name,
-    email,
-    password: await bcrypt.hash(password, 10),
-  });
+  const admin = await adminModel.findOne({ email });
 
-  res.send({
-    message: "Admin created successfully",
-  });
+  if (admin) {
+    res.send({
+      msg: "admin already exist",
+    });
+  } else {
+    await adminModel.create({
+      name,
+      email,
+      password: await bcrypt.hash(password, 10),
+    });
+    res.send({
+      msg: "new admin account created successfully",
+    });
+  }
+
+  // res.send({
+  //   message: "Admin created successfully",
+  // });
 };
 
 const loginAdmin = async (req, res) => {

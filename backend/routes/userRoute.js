@@ -13,7 +13,6 @@ userRoute.get("/read", async (req, res) => {
   const users = await userModel.find();
   res.send({
     userData : users,
-    // msg: "Hello from user route",
   }); 
 });
 
