@@ -2,7 +2,7 @@ const { Router } = require("express");
 const userRoute = Router();
 const mongoose = require("mongoose");
 const express = require("express");
-const { userModel } = require("../models/db");
+const { userModel } = require("../Models/db");
 
 // middleware
 const {

@@ -1,4 +1,4 @@
-const { courseModel, adminModel } = require("../models/db");
+const { courseModel, adminModel } = require("../Models/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { admin_jwt_secret } = require("../config");
