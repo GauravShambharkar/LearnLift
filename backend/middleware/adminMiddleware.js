@@ -1,12 +1,12 @@
 const { admin_jwt_secret } = require("../config");
-const { adminModel } = require("../Models/db");
+const { adminSchema } = require("../Models/db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const adminLoginMiddleware = async (req, res, next) => {
   const { email, password } = req.body;
 
-  const admin = await adminModel.findOne({ email });
+  const admin = await adminSchema.findOne({ email });
   const validPass = await bcrypt.verify(password, admin.password);
   if (admin) {
     if (validPass) {
@@ -37,7 +37,7 @@ const admin_jwt_Verification_Middleware = async (req, res, next) => {
 const delete_admin_Middeleware = async (req, res, next) => {
   const { email, password } = req.body;
 
-  const admin = await adminModel.findOneAndDelete({ email });
+  const admin = await adminSchema.findOneAndDelete({ email });
   const valid_Admin = await bcrypt.compare(password, admin.password);
   if (admin) {
     if (valid_Admin) {

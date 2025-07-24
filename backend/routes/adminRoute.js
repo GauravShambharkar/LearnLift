@@ -1,6 +1,6 @@
 const Router = require("express");
 const adminRoute = Router();
-const { adminModel } = require("../Models/db");
+const { adminSchema } = require("../Models/db");
 const {
   loginAdmin,
   registerAdmin,
@@ -15,7 +15,7 @@ const {
 } = require("../middleware/adminMiddleware");
 
 adminRoute.get("/read", async (req, res) => {
-  const adminData = await adminModel.find();
+  const adminData = await adminSchema.find();
   res.send({
     adminData: adminData,
   });

@@ -12,7 +12,7 @@ const Registerform = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    await fetch("http://localhost:3000/user/register", {
+    const response = await fetch("http://localhost:3000/user/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -20,7 +20,7 @@ const Registerform = () => {
       body: JSON.stringify(user),
     });
 
-    console.log(user);
+    console.log(response.json());
     e.target.reset();
   };
 
@@ -53,6 +53,7 @@ const Registerform = () => {
           type="text"
           placeholder="password"
         />
+
         <button type="submit">submit</button>
         <button
           onClick={() => {

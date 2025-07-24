@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
-const { userSchema } = require("./userModel");
-const { adminSchema } = require("./adminModel");
-const { courseSchema } = require("./courseModel");
-const { commentSchema } = require("./commentModel");
-const { notificationSchema } = require("./notificationModel");
+const { userSchema } = require("./userSchema");
+const { adminSchema } = require("./adminSchema");
+const { courseSchema } = require("./courseSchema");
+const { commentSchema } = require("./commentSchema");
+const { notificationSchema } = require("./notificationSchema");
 
 const userModel = mongoose.model("user", userSchema);
 const adminModel = mongoose.model("admin", adminSchema);

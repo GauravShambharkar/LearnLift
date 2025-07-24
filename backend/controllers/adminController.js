@@ -1,4 +1,4 @@
-const { courseModel, adminModel } = require("../Models/db");
+const { courseModel, adminSchema } = require("../Models/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { admin_jwt_secret } = require("../config");
@@ -6,14 +6,14 @@ const { admin_jwt_secret } = require("../config");
 const registerAdmin = async (req, res) => {
   const { name, email, password, role } = req.body;
 
-  const admin = await adminModel.findOne({ email });
+  const admin = await adminSchema.findOne({ email });
 
   if (admin) {
     res.send({
       msg: "admin already exist",
     });
   } else {
-    await adminModel.create({
+    await adminSchema.create({
       name,
       email,
       password: await bcrypt.hash(password, 10),
@@ -32,7 +32,7 @@ const registerAdmin = async (req, res) => {
 const loginAdmin = async (req, res) => {
   const { email, password } = req.body;
 
-  const admin = await adminModel.findOne({ email });
+  const admin = await adminSchema.findOne({ email });
   if (admin) {
     const validAdmin = await bcrypt.compare(password, admin.password);
     if (validAdmin) {
@@ -61,7 +61,7 @@ const admin_jwtValid = (req, res) => {
 const updateAdmin = async (req, res) => {
   const { New_name, New_email } = req.body;
 
-  const user = await adminModel.findOne({ email });
+  const user = await adminSchema.findOne({ email });
   if (user) {
     const updated_Admin = await userModel.findOneAndUpdate(
       { email },

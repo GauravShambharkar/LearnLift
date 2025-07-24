@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken");
 const { user_jwt_secret, admin_jwt_secret } = require("./config");
 
-const generateUserToken = (payload) => {
+const generate_UserToken = (payload) => {
   return jwt.sign(payload, user_jwt_secret);
 };
 
-const verifyUserToken = (token) => {
+const verify_UserToken = (token) => {
   try {
     return jwt.verify(token, user_jwt_secret);
   } catch (error) {
@@ -13,11 +13,11 @@ const verifyUserToken = (token) => {
   }
 };
 
-const generateAdminToken = (payload) => {
+const generate_AdminToken = (payload) => {
   return jwt.sign(payload, admin_jwt_secret);
 };
 
-const verifyAdminToken = (token) => {
+const verify_AdminToken = (token) => {
   try {
     return jwt.verify(token, admin_jwt_secret);
   } catch (error) {
@@ -26,8 +26,8 @@ const verifyAdminToken = (token) => {
 };
 
 module.exports = {
-  generateUserToken,
-  verifyUserToken,
-  generateAdminToken,
-  verifyAdminToken,
+  generate_UserToken,
+  verify_UserToken,
+  generate_AdminToken,
+  verify_AdminToken,
 };
