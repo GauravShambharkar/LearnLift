@@ -5,13 +5,13 @@ import Routing from "./Routing";
 const Nav = () => {
   return (
     <>
-      <div className="flex justify-end items-center p-4 bg-gray-800 text-white">
+      <div className="flex justify-end items-center p-4 border gap-4 font-medium  bg-gray-800 text-white">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/profile">Profile</NavLink>
         <NavLink to="/course">Course</NavLink>
         <NavLink to="/register">Register</NavLink>
-        <Routing/>
       </div>
+      <Routing />
     </>
   );
 };
