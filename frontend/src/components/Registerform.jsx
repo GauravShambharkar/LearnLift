@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRef } from "react";
 import cors from "cors";
-
+import {Button} from "@/components/ui/button"
 const Registerform = () => {
   const [user, setUser] = useState({
     name: "",
@@ -11,6 +11,7 @@ const Registerform = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    
 
     const response = await fetch("http://localhost:3000/user/register", {
       method: "POST",
@@ -53,16 +54,7 @@ const Registerform = () => {
           type="text"
           placeholder="password"
         />
-
-        <button type="submit">submit</button>
-        <button
-          onClick={() => {
-            handleDelete(user.email, user.password);
-          }}
-          type="button"
-        >
-          delete
-        </button>
+        <Button variant="outline"  >Button</Button>
       </form>
     </>
   );
