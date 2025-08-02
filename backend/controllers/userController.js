@@ -7,22 +7,39 @@ const { generate_UserToken } = require("../utils");
 
 const registerUser = async (req, res) => {
   const { name, email, password, role } = req.body;
+  try {
+    if (name && email && password) {
+      if (password.length > 8) {
+        const user = await userModel.findOne({ email });
 
-  const user = await userModel.findOne({ email });
-
-  if (user) {
-    res.send({
-      msg: "user already exist",
-    });
-  } else {
-    await userModel.create({
-      name,
-      email,
-      password: bcrypt.hashSync(password, 10),
-      role,
-    });
-    res.send({
-      msg: "new user account created successfully",
+        if (user) {
+          res.send({
+            msg: "user already exist",
+          });
+        } else {
+          await userModel.create({
+            name,
+            email,
+            password: bcrypt.hashSync(password, 10),
+            role,
+          });
+          res.send({
+            msg: "new user account created successfully",
+          });
+        }
+      } else {
+        res.status(400).send({
+          msg: "password must be at least 8 characters long",
+        });
+      }
+    } else {
+      res.status(400).send({
+        msg: "all fields are required",
+      });
+    }
+  } catch (err) {
+    res.status(500).send({
+      msg: "user controller error",
     });
   }
 };
@@ -36,7 +53,7 @@ const loginUser = async (req, res) => {
   const validPass = await bcrypt.compare(password, user.password);
   if (validPass) {
     // const token = await jwt.sign({ id: user._id }, user_jwt_secret);
-    const token = await generate_UserToken({id: user._id, }, user_jwt_secret);
+    const token = await generate_UserToken({ id: user._id }, user_jwt_secret);
     if (token) {
       res.send({
         token: token,

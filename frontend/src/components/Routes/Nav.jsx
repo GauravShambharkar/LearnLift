@@ -1,21 +1,23 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Routing from "./Routing";
-import { FolderArchiveIcon } from "lucide-react";
+import { FolderKeyIcon } from "lucide-react";
 
 const Nav = () => {
   return (
     <>
-      <div className="w-full fixed flex justify-between items-center p-4 gap-4 font-medium bg-black text-white">
+      <div className="w-full flex justify-between items-center p-4 gap-4 font-medium  text-black">
         <div className="flex gap-2 items-center">
-          <FolderArchiveIcon />
-          <h2 className="font-bold">Learn Lift</h2>
+          <FolderKeyIcon className="stroke-1" />
+          <h2 className="font-medium">Learn Lift</h2>
         </div>
         <div className="flex gap-3">
           <NavLink
             to="/"
             className={({ isActive }) => {
-              return isActive ? "text-blue-500" : "text-white";
+              return isActive
+                ? "text-black underline font-medium hover:text-black "
+                : "text-gray-400 font-medium hover:text-black transition-all duration-300 ease-in-out hover:underline";
             }}
           >
             Home
@@ -24,7 +26,9 @@ const Nav = () => {
           <NavLink
             to="/register"
             className={({ isActive }) => {
-              return isActive ? "text-blue-500" : "text-white";
+              return isActive
+                ? "text-black font-medium"
+                : "text-gray-400 font-medium hover:text-black transition-all duration-300 ease-in-out hover:underline";
             }}
           >
             Register
@@ -32,7 +36,9 @@ const Nav = () => {
           <NavLink
             to="/login"
             className={({ isActive }) => {
-              return isActive ? "text-blue-500" : "text-white";
+              return isActive
+                ? "text-black font-medium"
+                : "text-gray-400 font-medium hover:text-black transition-all duration-300 ease-in-out hover:underline";
             }}
           >
             Login
