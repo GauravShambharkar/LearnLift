@@ -9,27 +9,33 @@ const registerUser = async (req, res) => {
   const { name, email, password, role } = req.body;
   try {
     if (name && email && password) {
-      if (password.length > 8) {
-        const user = await userModel.findOne({ email });
+      if (email.includes("@gmail.com")) {
+        if (password.length > 8) {
+          const user = await userModel.findOne({ email });
 
-        if (user) {
-          res.send({
-            msg: "user already exist",
-          });
+          if (user) {
+            res.send({
+              msg: "user already exist",
+            });
+          } else {
+            await userModel.create({
+              name,
+              email,
+              password: bcrypt.hashSync(password, 10),
+              role,
+            });
+            res.send({
+              msg: "new user account created successfully",
+            });
+          }
         } else {
-          await userModel.create({
-            name,
-            email,
-            password: bcrypt.hashSync(password, 10),
-            role,
-          });
-          res.send({
-            msg: "new user account created successfully",
+          res.status(400).send({
+            msg: "password must be at least 8 characters long",
           });
         }
       } else {
         res.status(400).send({
-          msg: "password must be at least 8 characters long",
+          msg: "email must include @email.com",
         });
       }
     } else {
