@@ -6,7 +6,7 @@ const { user_jwt_secret } = require("../config");
 const { generate_UserToken } = require("../utils");
 
 const registerUser = async (req, res) => {
-  const { name, email, password, role } = req.body;
+  const { name, email, password } = req.body;
   try {
     if (name && email && password) {
       if (email.includes("@gmail.com")) {
@@ -22,7 +22,6 @@ const registerUser = async (req, res) => {
               name,
               email,
               password: bcrypt.hashSync(password, 10),
-              role,
             });
             res.send({
               msg: "new user account created successfully",

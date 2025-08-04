@@ -8,13 +8,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Registerform = () => {
   const [user, setUser] = useState({
     name: "",
     email: "",
     password: "",
+    ConfirmPassword: "",
   });
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -25,17 +29,18 @@ const Registerform = () => {
     setMessage("");
 
     try {
-      const response = await fetch("http://localhost:3000/user/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
+      const response = await axios.post("http://localhost:3000/user/register", {
+        name: user.name,
+        email: user.email,
+        password: user.password,
       });
 
-      const data = await response.json();
+      // const data = await response.data;
 
-      if (response.ok) {
+      if (response.data) {
+        setTimeout(() => {
+          navigate("/login");
+        }, 1500);
         setMessage("Registration successful! You can now login.");
         e.target.reset();
         setUser({ name: "", email: "", password: "" });
@@ -133,7 +138,20 @@ const Registerform = () => {
                 disabled={isLoading}
               />
             </div>
-
+            <div className="space-y-2 ">
+              <label htmlFor="password" className="text-sm w-full font-medium">
+                Confirm Password
+              </label>
+              <Input
+                id="password"
+                onChange={(e) => setUser({ ...user, password: e.target.value })}
+                type="password"
+                placeholder="Enter your password"
+                value={user.password}
+                required
+                disabled={isLoading}
+              />
+            </div>
             {message && (
               <div
                 className={`p-3 rounded-md text-sm ${
