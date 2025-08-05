@@ -39,7 +39,6 @@ const Profile = () => {
   }, [navigate]);
 
   const handleLogout = () => {
-    // Clear localStorage
     localStorage.removeItem("token");
     localStorage.removeItem("name");
     localStorage.removeItem("email");
