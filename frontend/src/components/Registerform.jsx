@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 
 const Registerform = () => {
   const [user, setUser] = useState({
@@ -35,18 +35,19 @@ const Registerform = () => {
         password: user.password,
       });
 
-      // const data = await response.data;
-
-      if (response.data) {
+      if (user.password.length < 8) {
+        setMessage("password should be at least 8 character");
+      } else if (response.data) {
         setTimeout(() => {
           navigate("/login");
         }, 1500);
         setMessage("Registration successful! You can now login.");
         e.target.reset();
         setUser({ name: "", email: "", password: "" });
-      } else {
-        setMessage(data.msg || "Registration failed. Please try again.");
       }
+      // else {
+      //   setMessage(data.msg || "Registration failed. Please try again.");
+      // }
     } catch (error) {
       console.error("Registration error:", error);
       setMessage("Network error. Please check your connection.");

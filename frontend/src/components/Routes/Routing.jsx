@@ -4,20 +4,16 @@ import Home from "../Home";
 import Login from "../Login";
 import Register from "../Register";
 import Registerform from "../Registerform";
+import Profile from "../Profile";
 
 const Routing = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />}>
-          Home
-        </Route>
-        <Route path="/Login" element={<Login />}>
-          Login
-        </Route>
-        <Route path="/Register" element={<Registerform />}>
-          Register
-        </Route>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Registerform />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </>
   );

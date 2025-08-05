@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { user_jwt_secret } = require("../config");
 const { generate_UserToken } = require("../utils");
+const { response } = require("express");
 
 const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
@@ -52,25 +53,44 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await userModel.findOne({
-    email,
-  });
-  const validPass = await bcrypt.compare(password, user.password);
-  if (validPass) {
-    // const token = await jwt.sign({ id: user._id }, user_jwt_secret);
-    const token = await generate_UserToken({ id: user._id }, user_jwt_secret);
-    if (token) {
-      res.send({
-        token: token,
-      });
-    } else {
-      res.status(401).send({
-        message: "wrong user password",
+  try {
+    // Check if user exists
+    const user = await userModel.findOne({ email });
+
+    if (!user) {
+      return res.status(401).send({
+        msg: "Invalid email or password",
       });
     }
-  } else {
-    res.status(401).send({
-      msg: "wrong user credential",
+
+    // Verify password
+    const validPass = await bcrypt.compare(password, user.password);
+
+    if (!validPass) {
+      return res.status(401).send({
+        msg: "Invalid email or password",
+      });
+    }
+
+    // Generate token
+    const token = await generate_UserToken({ id: user._id }, user_jwt_secret);
+
+    if (token) {
+      res.send({
+        name: user.name,
+        email: user.email,
+        token: token,
+        role: user.role || "user",
+      });
+    } else {
+      res.status(500).send({
+        msg: "Token generation failed",
+      });
+    }
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).send({
+      msg: "Internal server error",
     });
   }
 };
