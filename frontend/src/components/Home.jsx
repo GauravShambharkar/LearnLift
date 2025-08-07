@@ -22,7 +22,7 @@ const Home = () => {
             </h1>
 
             {/* Subheading */}
-            <p className=" tracking-tight leading-tight  md:text-2xl text-gray-600 max-w-3xl mx-auto ">
+            <p className=" tracking-tight leading-tight text-xl text-gray-600 max-w-3xl mx-auto ">
               Discover personalized learning journeys, connect with expert
               creators, and unlock your potential with LearnLift's innovative
               platform.

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Routing from "./Routing";
-import { FolderKeyIcon, User, LogOut } from "lucide-react";
+import { FolderKeyIcon, User, LogOut, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Nav = () => {
@@ -76,6 +76,10 @@ const Nav = () => {
             </>
           ) : (
             <>
+              <div className="flex items-center">
+                <Search/>
+                <input type="text" placeholder="Explore your learning..."/>
+              </div>
               <div className="flex items-center gap-2 text-gray-600">
                 <User className="w-4 h-4" />
                 <span className="text-sm">{userName}</span>
