@@ -25,6 +25,7 @@ const registerUser = async (req, res) => {
               password: bcrypt.hashSync(password, 10),
             });
             res.send({
+              register: true,
               msg: "new user account created successfully",
             });
           }
@@ -56,9 +57,9 @@ const loginUser = async (req, res) => {
   try {
     // Check if user exists
     const user = await userModel.findOne({ email });
-
     if (!user) {
       return res.status(401).send({
+        Credential: false,
         msg: "Invalid email or password",
       });
     }
@@ -68,13 +69,13 @@ const loginUser = async (req, res) => {
 
     if (!validPass) {
       return res.status(401).send({
+        password: false,
         msg: "Invalid email or password",
       });
     }
 
     // Generate token
-    const token = await generate_UserToken({ id: user._id }, user_jwt_secret);
-
+    const token = await generate_UserToken({ id: user._id });
     if (token) {
       res.send({
         name: user.name,
@@ -84,6 +85,7 @@ const loginUser = async (req, res) => {
       });
     } else {
       res.status(500).send({
+        token: false,
         msg: "Token generation failed",
       });
     }
