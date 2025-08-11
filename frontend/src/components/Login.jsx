@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -41,6 +41,8 @@ const Login = () => {
         setMessage("Login successful! Redirecting...");
 
         setTimeout(() => {
+          // Refresh the page to update navbar automatically
+          window.location.reload();
           navigate("/profile");
           e.target.reset();
           setUser({ email: "", password: "" });
@@ -70,6 +72,7 @@ const Login = () => {
       setIsLoading(false);
     }
   };
+
 
   return (
     <>

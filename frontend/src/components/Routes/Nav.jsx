@@ -9,17 +9,24 @@ const Nav = () => {
   const [userName, setUserName] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
+  // Simple function to check if user is logged in
+  const checkIfUserIsLoggedIn = () => {
     const token = localStorage.getItem("token");
     const name = localStorage.getItem("name");
 
     if (token) {
       setIsAuthenticated(true);
+      navigate("/profile");
       setUserName(name || "User");
     } else {
       setIsAuthenticated(false);
       setUserName("");
     }
+  };
+
+  // Check when component first loads
+  useEffect(() => {
+    checkIfUserIsLoggedIn();
   }, []);
 
   const handleLogout = () => {
@@ -29,6 +36,8 @@ const Nav = () => {
     localStorage.removeItem("role");
     setIsAuthenticated(false);
     setUserName("");
+
+    // Refresh the page to update navbar automatically
     navigate("/login");
   };
 
@@ -40,17 +49,21 @@ const Nav = () => {
           <h2 className="font-medium">Learn Lift</h2>
         </div>
         <div className="flex gap-3 items-center">
-          <NavLink
-            to="/"
-            className={({ isActive }) => {
-              return isActive
-                ? "text-black underline font-medium hover:text-black"
-                : "text-gray-400 font-medium hover:text-black transition-all duration-300 ease-in-out hover:underline";
-            }}
-          >
-            Home
-          </NavLink>
+          {/* Only show Home link if user is NOT logged in */}
+          {!isAuthenticated && (
+            <NavLink
+              to="/"
+              className={({ isActive }) => {
+                return isActive
+                  ? "text-black underline font-medium hover:text-black"
+                  : "text-gray-400 font-medium hover:text-black transition-all duration-300 ease-in-out hover:underline";
+              }}
+            >
+              Home
+            </NavLink>
+          )}
 
+          {/* Show Register and Login only if user is NOT logged in */}
           {!isAuthenticated ? (
             <>
               <NavLink
@@ -63,6 +76,7 @@ const Nav = () => {
               >
                 Register
               </NavLink>
+
               <NavLink
                 to="/login"
                 className={({ isActive }) => {
@@ -76,9 +90,10 @@ const Nav = () => {
             </>
           ) : (
             <>
+              {/* Show search bar, user info, profile, and logout if user IS logged in */}
               <div className="flex items-center">
-                <Search/>
-                <input type="text" placeholder="Explore your learning..."/>
+                <Search />
+                <input type="text" placeholder="Explore your learning..." />
               </div>
               <div className="flex items-center gap-2 text-gray-600">
                 <User className="w-4 h-4" />
