@@ -64,19 +64,18 @@ const Login = () => {
           );
         }
       } else if (error.request) {
-        setMessage("Network error. Please check your connection.");
+        setMessage("Serve error. Please try gain later.");
       } else {
-        setMessage("An unexpected error occurred. Please try again.");
+        setMessage("An unexpected error occurred. check your network.");
       }
     } finally {
       setIsLoading(false);
     }
   };
 
-
   return (
     <>
-      <div className="flex justify-center items-center min-h-screen bg-gray-50 p-4">
+      <div className="all-center min-h-screen bg-gray-50 p-4">
         <Card className="w-full max-w-md">
           <CardHeader>
             <CardTitle className="text-2xl font-bold text-center">
@@ -131,11 +130,17 @@ const Login = () => {
                   {message}
                 </div>
               )}
+              <div className="x-center gap-2">
+                Dont Have An Account?{" "}
+                <a href="/register" className="text-blue-500">
+                  Register Now
+                </a>
+              </div>
 
               <div className="space-y-3 pt-4">
-                <Button type="submit" className="w-full" disabled={isLoading}>
+                <button type="submit" className="shad-btn" disabled={isLoading}>
                   {isLoading ? "Signing In..." : "Sign In"}
-                </Button>
+                </button>
               </div>
             </form>
           </CardContent>

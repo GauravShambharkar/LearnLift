@@ -153,7 +153,7 @@ const Registerform = () => {
                 disabled={isLoading}
               />
             </div>
-            { message && (
+            {message && (
               <div
                 className={`p-3 rounded-md text-sm ${
                   message.includes("successful")
@@ -165,7 +165,14 @@ const Registerform = () => {
               </div>
             )}
 
-            <div className="space-y-3 pt-4">
+            <div className="x-center gap-2">
+              Already Have An Account?{" "}
+              <a href="/login" className="text-blue-500">
+                Login Now
+              </a>
+            </div>
+
+            <div className="space-y-3  pt-4">
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Creating Account..." : "Create Account"}
               </Button>
