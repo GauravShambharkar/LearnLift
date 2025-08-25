@@ -21,6 +21,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
 
+ 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -73,6 +74,7 @@ const Login = () => {
     }
   };
 
+  
   return (
     <>
       <div className="allcenter min-h-screen bg-gray-50 p-4">
@@ -136,7 +138,7 @@ const Login = () => {
                   {isLoading ? "Signing In..." : "Sign In"}
                 </button>
               </div>
-              <div className="ycenter gap-2">
+              <div className="xcenter gap-2">
                 Dont Have An Account?{" "}
                 <a href="/register" className="text-blue-500">
                   Register Now

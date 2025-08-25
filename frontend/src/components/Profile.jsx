@@ -36,14 +36,14 @@ const Profile = () => {
       role: userRole || "user",
     });
     setIsLoading(false);
-  }, [navigate]);
+  }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token", "name", "email", "role");
+    localStorage.removeItem("token");
     localStorage.removeItem("name");
     localStorage.removeItem("email");
     localStorage.removeItem("role");
-
+    // localStorage.clear();
     navigate("/login");
   };
 
@@ -95,7 +95,7 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="pt-4 space-y-3 border xend ycenter">
+          {/* <div className="pt-4 space-y-3 border xend ycenter">
             <Button
               onClick={handleLogout}
               variant="outline"
@@ -104,7 +104,7 @@ const Profile = () => {
               <LogOut className="w-4 h-4" />
               Logout
             </Button>
-          </div>
+          </div> */}
         </CardContent>
       </Card>
     </div>

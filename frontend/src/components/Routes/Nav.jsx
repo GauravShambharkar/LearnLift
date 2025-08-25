@@ -25,9 +25,11 @@ const Nav = () => {
     }
   };
 
-  // Check when component first loads
+
+
   useEffect(() => {
     checkIfUserIsLoggedIn();
+    // Listen for localStorage changes (e.g., logout from Profile)
   }, []);
 
   const handleLogout = () => {
@@ -95,8 +97,7 @@ const Nav = () => {
               <div className="flex items-center gap-2  ">
                 <Search className="w-5" />
                 {/* <input type="text" placeholder="Explore your learning..." /> */}
-                <Input type="email" placeholder="Explore your learning..."/>
-
+                <Input type="email" placeholder="Explore your learning..." />
               </div>
               <div className="flex items-center gap-2 text-gray-600">
                 <User className="w-4 h-4" />
