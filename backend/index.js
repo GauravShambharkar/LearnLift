@@ -33,7 +33,9 @@ app.use("/course", courseRoute);
 //   });
 // })();
 
-const port = process.env.port || 3000;
-app.listen(port, () => {
+const port = 3000;
+
+app.listen(port, (e) => {
+  if (!port) return e.message("check your internet connection");
   console.log("server running successfully");
 });

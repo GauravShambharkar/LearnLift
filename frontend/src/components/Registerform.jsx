@@ -165,13 +165,6 @@ const Registerform = () => {
               </div>
             )}
 
-            <div className="x-center gap-2">
-              Already Have An Account?{" "}
-              <a href="/login" className="text-blue-500">
-                Login Now
-              </a>
-            </div>
-
             <div className="space-y-3  pt-4">
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Creating Account..." : "Create Account"}
@@ -186,6 +179,12 @@ const Registerform = () => {
               >
                 Delete Account
               </Button>
+            </div>
+            <div className="ycenter gap-2">
+              Already Have An Account?{" "}
+              <a href="/login" className="text-blue-500">
+                Login Now
+              </a>
             </div>
           </form>
         </CardContent>

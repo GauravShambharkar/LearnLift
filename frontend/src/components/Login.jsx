@@ -63,8 +63,8 @@ const Login = () => {
             error.response.data?.msg || "Login failed. Please try again."
           );
         }
-      } else if (error.request) {
-        setMessage("Serve error. Please try gain later.");
+      } else if (error.message) {
+        setMessage("Check your internet connection...");
       } else {
         setMessage("An unexpected error occurred. check your network.");
       }
@@ -75,7 +75,7 @@ const Login = () => {
 
   return (
     <>
-      <div className="all-center min-h-screen bg-gray-50 p-4">
+      <div className="allcenter min-h-screen bg-gray-50 p-4">
         <Card className="w-full max-w-md">
           <CardHeader>
             <CardTitle className="text-2xl font-bold text-center">
@@ -130,17 +130,17 @@ const Login = () => {
                   {message}
                 </div>
               )}
-              <div className="x-center gap-2">
-                Dont Have An Account?{" "}
-                <a href="/register" className="text-blue-500">
-                  Register Now
-                </a>
-              </div>
 
               <div className="space-y-3 pt-4">
                 <button type="submit" className="shad-btn" disabled={isLoading}>
                   {isLoading ? "Signing In..." : "Sign In"}
                 </button>
+              </div>
+              <div className="ycenter gap-2">
+                Dont Have An Account?{" "}
+                <a href="/register" className="text-blue-500">
+                  Register Now
+                </a>
               </div>
             </form>
           </CardContent>

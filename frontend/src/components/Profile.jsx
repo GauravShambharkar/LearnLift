@@ -95,9 +95,13 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="pt-4 space-y-3">
-            <Button onClick={handleLogout} variant="outline" className="w-full">
-              <LogOut className="w-4 h-4 mr-2" />
+          <div className="pt-4 space-y-3 border xend ycenter">
+            <Button
+              onClick={handleLogout}
+              variant="outline"
+              className="log-out-Btn"
+            >
+              <LogOut className="w-4 h-4" />
               Logout
             </Button>
           </div>
