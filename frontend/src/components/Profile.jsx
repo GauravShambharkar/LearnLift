@@ -47,6 +47,32 @@ const Profile = () => {
     navigate("/login");
   };
 
+  const handleDelete = async (email, password) => {
+    // if (!email || !password) {
+    //   setMessage("Please enter email and password to delete account.");
+    //   return;
+    // }
+
+    try {
+      const response = await fetch("http://localhost:3000/user/deleteUser", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        setMessage("Account deleted successfully.");
+      } else {
+        setMessage("Failed to delete account. Please check your credentials.");
+      }
+    } catch (error) {
+      console.error("Delete error:", error);
+      setMessage("Network error. Please check your connection.");
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -95,16 +121,17 @@ const Profile = () => {
             </div>
           </div>
 
-          {/* <div className="pt-4 space-y-3 border xend ycenter">
+          <div className="pt-4 space-y-3 border ">
             <Button
-              onClick={handleLogout}
+              type="button"
               variant="outline"
-              className="log-out-Btn"
+              className="delete-Btn w-full  "
+              onClick={() => handleDelete(user.email, user.password)}
+              // disabled={isLoading || !user.email || !user.password}
             >
-              <LogOut className="w-4 h-4" />
-              Logout
+              Delete Account
             </Button>
-          </div> */}
+          </div>
         </CardContent>
       </Card>
     </div>

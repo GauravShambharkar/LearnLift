@@ -180,7 +180,7 @@ const Registerform = () => {
                 Delete Account
               </Button>
             </div>
-            <div className="ycenter gap-2">
+            <div className="xcenter gap-2">
               Already Have An Account?{" "}
               <a href="/login" className="text-blue-500">
                 Login Now
