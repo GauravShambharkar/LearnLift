@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { User, Mail, LogOut, Shield } from "lucide-react";
+import { User, Mail, LogOut, Shield, Link2Icon } from "lucide-react";
 
 const Profile = () => {
   const [user, setUser] = useState({
@@ -19,6 +19,7 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const [deleteAccount, setDeleteAccount] = useState();
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -48,7 +49,7 @@ const Profile = () => {
     navigate("/login");
   };
 
-  const handleDelete = async (email, password) => {
+  const handleDelete = async (email, name) => {
     // if (!email || !password) {
     //   setMessage("Please enter email and password to delete account.");
     //   return;
@@ -60,11 +61,16 @@ const Profile = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, name }),
       });
 
       if (response.ok) {
+        setDeleteAccount(false);
         setMessage("Account deleted successfully.");
+        setTimeout(() => {
+          localStorage.clear();
+          navigate("/register");
+        }, 1500);
       } else {
         setMessage("Failed to delete account. Please check your credentials.");
       }
@@ -92,7 +98,7 @@ const Profile = () => {
           <div className="mx-auto w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
             <User className="w-8 h-8 text-primary-foreground" />
           </div>
-          <CardTitle className="text-2xl font-bold">Profile</CardTitle>
+          <CardTitle className="text-2xl font-bold">{user.name}</CardTitle>
           <CardDescription>Welcome to your LearnLift profile</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -138,15 +144,16 @@ const Profile = () => {
           </div>
         </CardContent>
       </Card>
+
       {deleteAccount && (
-        <div className="w-full h-screen bg-[#ffffff99] absolute">
+        <div className="w-full h-screen bg-[#ffffff99] backdrop-blur-sm absolute">
           <div className="w-66 h-30 border p-4 rounded-md allcenter gap-3 flex-col shadow-md bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <h2>Confirm Delete?</h2>
             <div className="w-full flex xcenter gap-3">
               <Button
                 onClick={() => {
                   // setDeleteAccount(true);
-                  handleDelete(user.email, user.password);
+                  handleDelete(user.email, user.name);
                 }}
                 className="delete-Btn"
               >
@@ -161,6 +168,15 @@ const Profile = () => {
                 Cancle
               </Button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {message && (
+        <div className="w-full h-screen bg-[#ffffff99] backdrop-blur-sm absolute">
+          <div className="w-66 h-30 border p-4 rounded-md allcenter gap-3 flex-col shadow-md bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <h1>{message}</h1>
+            <Link2Icon/><Link>Register Now</Link>
           </div>
         </div>
       )}

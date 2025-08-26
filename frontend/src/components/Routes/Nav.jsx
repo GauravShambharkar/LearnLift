@@ -25,8 +25,6 @@ const Nav = () => {
     }
   };
 
-
-
   useEffect(() => {
     checkIfUserIsLoggedIn();
     // Listen for localStorage changes (e.g., logout from Profile)
@@ -46,7 +44,7 @@ const Nav = () => {
 
   return (
     <>
-      <div className="w-full flex justify-between border-b-2 border-dashed items-center p-4 gap-4 font-medium text-black">
+      <div className="w-full flex justify-between text-sm border-b-2 border-dashed items-center p-4 gap-4 font-medium text-black">
         <div className="flex gap-2 items-center">
           <FolderKeyIcon className="stroke-1" />
           <h2 className="font-medium">Learn Lift</h2>
