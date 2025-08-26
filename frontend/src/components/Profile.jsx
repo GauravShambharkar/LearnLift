@@ -18,6 +18,7 @@ const Profile = () => {
   });
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const [deleteAccount, setDeleteAccount] = useState();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -126,7 +127,10 @@ const Profile = () => {
               type="button"
               variant="outline"
               className="delete-Btn w-full  "
-              onClick={() => handleDelete(user.email, user.password)}
+              onClick={() => {
+                setDeleteAccount(true);
+              }}
+
               // disabled={isLoading || !user.email || !user.password}
             >
               Delete Account
@@ -134,6 +138,32 @@ const Profile = () => {
           </div>
         </CardContent>
       </Card>
+      {deleteAccount && (
+        <div className="w-full h-screen bg-[#ffffff99] absolute">
+          <div className="w-66 h-30 border p-4 rounded-md allcenter gap-3 flex-col shadow-md bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <h2>Confirm Delete?</h2>
+            <div className="w-full flex xcenter gap-3">
+              <Button
+                onClick={() => {
+                  // setDeleteAccount(true);
+                  handleDelete(user.email, user.password);
+                }}
+                className="delete-Btn"
+              >
+                Delete
+              </Button>
+              <Button
+                onClick={() => {
+                  setDeleteAccount(false);
+                }}
+                className="save"
+              >
+                Cancle
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
