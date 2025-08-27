@@ -58,10 +58,10 @@ const Login = () => {
 
       if (error.response) {
         if (error.response.status === 401) {
-          toast.error("Invalid email or password.");
+          toast.warning("Invalid email or password.");
           // setMessage("Invalid email or password.");
         } else if (error.response.status === 404) {
-          toast.error("User not found.");
+          toast.warning("User not found.");
           // setMessage("User not found.");
         } else {
           toast.error(
