@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Toaster, toast } from "sonner";
 import {
   Card,
   CardContent,
@@ -21,7 +22,6 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
 
- 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -39,7 +39,8 @@ const Login = () => {
         localStorage.setItem("name", response.data.name);
         localStorage.setItem("role", response.data.role || "user");
 
-        setMessage("Login successful! Redirecting...");
+        toast.success("Login successful! Redirecting...");
+        // setMessage("Login successful! Redirecting...");
 
         setTimeout(() => {
           // Refresh the page to update navbar automatically
@@ -49,35 +50,43 @@ const Login = () => {
           setUser({ email: "", password: "" });
         }, 1500);
       } else {
-        setMessage("Invalid credentials. Please try again.");
+        toast.error("Invalid credentials. Please try again.");
+        // setMessage("Invalid credentials. Please try again.");
       }
     } catch (error) {
       console.error("Login error:", error);
 
       if (error.response) {
         if (error.response.status === 401) {
-          setMessage("Invalid email or password.");
+          toast.error("Invalid email or password.");
+          // setMessage("Invalid email or password.");
         } else if (error.response.status === 404) {
-          setMessage("User not found.");
+          toast.error("User not found.");
+          // setMessage("User not found.");
         } else {
-          setMessage(
+          toast.error(
             error.response.data?.msg || "Login failed. Please try again."
           );
+          // setMessage(
+          //   error.response.data?.msg || "Login failed. Please try again."
+          // );
         }
       } else if (error.message) {
-        setMessage("Check your internet connection...");
+        toast.error("Check your internet connection...");
+        // setMessage("Check your internet connection...");
       } else {
-        setMessage("An unexpected error occurred. check your network.");
+        toast.error("An unexpected error occurred. check your network.");
+        // setMessage("An unexpected error occurred. check your network.");
       }
     } finally {
       setIsLoading(false);
     }
   };
 
-  
   return (
     <>
       <div className="allcenter min-h-screen bg-gray-50 p-4">
+        <Toaster position="top-center" richColors />
         <Card className="w-full max-w-md">
           <CardHeader>
             <CardTitle className="text-2xl font-bold text-center">
@@ -138,7 +147,7 @@ const Login = () => {
                   {isLoading ? "Signing In..." : "Sign In"}
                 </button>
               </div>
-              <div className="xcenter gap-2">
+              <div className="xcenter gap-2 text-sm ">
                 Dont Have An Account?{" "}
                 <a href="/register" className="text-blue-500">
                   Register Now

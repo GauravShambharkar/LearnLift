@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import axios from "axios";
 import { data, useNavigate } from "react-router-dom";
+import { Toaster, toast } from "sonner";
 
 const Registerform = () => {
   const [user, setUser] = useState({
@@ -41,7 +42,9 @@ const Registerform = () => {
         setTimeout(() => {
           navigate("/login");
         }, 1500);
-        setMessage("Registration successful! You can now login.");
+        toast.success("Registration successful! You can now login.");
+        //
+        // setMessage("Registration successful! You can now login.");
         e.target.reset();
         setUser({ name: "", email: "", password: "" });
       }
@@ -50,7 +53,8 @@ const Registerform = () => {
       // }
     } catch (error) {
       console.error("Registration error:", error);
-      setMessage("Network error. Please check your connection.");
+      toast.error("Registration failed. Please try again.");
+      // setMessage("Network error. Please check your connection.");
     } finally {
       setIsLoading(false);
     }
@@ -58,7 +62,8 @@ const Registerform = () => {
 
   const handleDelete = async (email, password) => {
     if (!email || !password) {
-      setMessage("Please enter email and password to delete account.");
+      toast.error("Please enter email and password to delete account.");
+      // setMessage("Please enter email and password to delete account.");
       return;
     }
 
@@ -72,18 +77,22 @@ const Registerform = () => {
       });
 
       if (response.ok) {
-        setMessage("Account deleted successfully.");
+        toast.error("Account deleted successfully.");
+        // setMessage("Account deleted successfully.");
       } else {
-        setMessage("Failed to delete account. Please check your credentials.");
+        toast.error("Failed to delete account. Please check your credentials.");
+        // setMessage("Failed to delete account. Please check your credentials.");
       }
     } catch (error) {
       console.error("Delete error:", error);
-      setMessage("Network error. Please check your connection.");
+      toast.error("Network error. Please check your connection.");
+      // setMessage("Network error. Please check your connection.");
     }
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-50 p-4">
+      <Toaster position="top-center" richColors />
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">
@@ -166,7 +175,7 @@ const Registerform = () => {
             )}
 
             <div className="space-y-3  pt-4">
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button type="submit" className="w-full cursor-pointer" disabled={isLoading}>
                 {isLoading ? "Creating Account..." : "Create Account"}
               </Button>
 
@@ -180,7 +189,7 @@ const Registerform = () => {
                 Delete Account
               </Button> */}
             </div>
-            <div className="xcenter gap-2">
+            <div className="xcenter gap-2 text-sm">
               Already Have An Account?{" "}
               <a href="/login" className="text-blue-500">
                 Login Now
