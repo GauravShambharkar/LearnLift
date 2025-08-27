@@ -66,6 +66,7 @@ const Profile = () => {
 
       if (response.ok) {
         setDeleteAccount(false);
+        console.log(response);
         setMessage("Account deleted successfully.");
         setTimeout(() => {
           localStorage.clear();
@@ -176,7 +177,8 @@ const Profile = () => {
         <div className="w-full h-screen bg-[#ffffff99] backdrop-blur-sm absolute">
           <div className="w-66 h-30 border p-4 rounded-md allcenter gap-3 flex-col shadow-md bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <h1>{message}</h1>
-            <Link2Icon/><Link>Register Now</Link>
+            <Link2Icon />
+            <Link>Register Now</Link>
           </div>
         </div>
       )}

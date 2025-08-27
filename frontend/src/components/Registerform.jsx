@@ -170,7 +170,7 @@ const Registerform = () => {
                 {isLoading ? "Creating Account..." : "Create Account"}
               </Button>
 
-              <Button
+              {/* <Button
                 type="button"
                 variant="outline"
                 className="w-full"
@@ -178,7 +178,7 @@ const Registerform = () => {
                 disabled={isLoading || !user.email || !user.password}
               >
                 Delete Account
-              </Button>
+              </Button> */}
             </div>
             <div className="xcenter gap-2">
               Already Have An Account?{" "}
