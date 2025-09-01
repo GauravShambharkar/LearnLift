@@ -45,7 +45,8 @@ const Login = () => {
         setTimeout(() => {
           // Refresh the page to update navbar automatically
           window.location.reload();
-          navigate("/profile");
+          navigate("/dashboard");
+          // navigate("/profile");
           e.target.reset();
           setUser({ email: "", password: "" });
         }, 1500);

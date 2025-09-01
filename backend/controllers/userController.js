@@ -8,6 +8,7 @@ const { response } = require("express");
 
 const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
+
   try {
     if (name && email && password) {
       if (email.includes("@gmail.com")) {

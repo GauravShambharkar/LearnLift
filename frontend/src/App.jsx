@@ -4,6 +4,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import Registerform from "./components/Registerform";
 import Nav from "./components/Routes/Nav";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (

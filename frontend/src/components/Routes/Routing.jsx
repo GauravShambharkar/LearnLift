@@ -4,6 +4,7 @@ import Home from "../Home";
 import Login from "../Login";
 import Registerform from "../Registerform";
 import Profile from "../Profile";
+import Dashboard from "../Dashboard";
 
 const Routing = () => {
   return (
@@ -13,6 +14,7 @@ const Routing = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registerform />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </>
   );

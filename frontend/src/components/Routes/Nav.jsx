@@ -17,7 +17,8 @@ const Nav = () => {
 
     if (token) {
       setIsAuthenticated(true);
-      navigate("/profile");
+      navigate("/dashboard");
+      // navigate("/profile");
       setUserName(name || "User");
     } else {
       setIsAuthenticated(false);
@@ -111,6 +112,7 @@ const Nav = () => {
               >
                 Profile
               </NavLink>
+              <NavLink to="/dashboard">dashboard</NavLink>
               <Button
                 onClick={handleLogout}
                 variant="outline"
