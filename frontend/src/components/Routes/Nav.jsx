@@ -112,7 +112,16 @@ const Nav = () => {
               >
                 Profile
               </NavLink>
-              <NavLink to="/dashboard">dashboard</NavLink>
+              <NavLink
+                className={({ isActive }) => {
+                  return isActive
+                    ? "text-black font-medium"
+                    : "text-gray-400 font-medium hover:text-black transition-all duration-300 ease-in-out hover:underline";
+                }}
+                to="/dashboard"
+              >
+                dashboard
+              </NavLink>
               <Button
                 onClick={handleLogout}
                 variant="outline"

@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { User, Mail, LogOut, Shield, Link2Icon } from "lucide-react";
+import { User, Mail, LogOut, Shield, Link2Icon, Plus } from "lucide-react";
 
 const Profile = () => {
   const [user, setUser] = useState({
@@ -129,7 +129,13 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="pt-4 space-y-3 border ">
+          <div className="w-full border xend">
+            <span className="btn">
+              <Plus className=" size-4" />
+            </span>
+          </div>
+
+          <div className="pt-4 space-y-3 ">
             <Button
               type="button"
               variant="outline"
