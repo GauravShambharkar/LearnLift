@@ -183,7 +183,7 @@
 }
 
 .save {
-  @apply bg-[#edffe4de] text-[#00720d] hover:bg-[#9fffa7] hover:text-[#00bd26] flex items-center justify-center gap-1 border border-green-300 transition-all duration-400 ease-in-out cursor-pointer;
+  @apply bg-[#edffe4de] text-[#00720d] hover:bg-[#c5ffca] hover:text-[#00bd26] flex items-center justify-center gap-1 border border-green-300 transition-all duration-400 ease-in-out cursor-pointer;
 }
 
 .hoverfx {

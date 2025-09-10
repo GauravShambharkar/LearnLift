@@ -135,11 +135,11 @@ const Profile = () => {
             </span>
           </div>
 
-          <div className="pt-4 space-y-3 ">
+          <div className="pt-4 space-y-3 xend ">
             <Button
               type="button"
               variant="outline"
-              className="delete-Btn w-full  "
+              className="delete-Btn  "
               onClick={() => {
                 setDeleteAccount(true);
               }}
