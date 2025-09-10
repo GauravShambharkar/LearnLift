@@ -17,7 +17,7 @@ const Nav = () => {
 
     if (token) {
       setIsAuthenticated(true);
-      navigate("/dashboard");
+      // navigate("/dashboard");
       // navigate("/profile");
       setUserName(name || "User");
     } else {
@@ -117,7 +117,7 @@ const Nav = () => {
                 onClick={handleLogout}
                 variant="outline"
                 size="sm"
-                className="log-out-Btn"
+                className="log-out-Btn delete-Btn"
               >
                 <LogOut className="w-3 h-3" />
                 Logout

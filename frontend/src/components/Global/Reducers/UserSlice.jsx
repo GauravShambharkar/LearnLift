@@ -15,6 +15,11 @@ const userSlice = createSlice({
     addPost: (state, action) => {
       state.post.push(action.payload);
     },
+    removePost: (state, action) => {
+      state.post.filter((_, index) => {
+        state.post = index !== action.payload;
+      });
+    },
   },
 });
 

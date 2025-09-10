@@ -93,8 +93,8 @@ const Profile = () => {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50 p-4">
-      <Card className="w-full max-w-md">
+    <div className="flex w-full justify-center items-center bg-gray-50 p-4">
+      <Card className="w-full h-full ">
         <CardHeader className="text-center">
           <div className="mx-auto w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
             <User className="w-8 h-8 text-primary-foreground" />
@@ -102,8 +102,8 @@ const Profile = () => {
           <CardTitle className="text-2xl font-bold">{user.name}</CardTitle>
           <CardDescription>Welcome to your LearnLift profile</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-3">
+        <CardContent className="space-y-4 ">
+          <div className="space-y-3 border-black">
             <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
               <User className="w-5 h-5 text-gray-500" />
               <div>
