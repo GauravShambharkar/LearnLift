@@ -13,11 +13,13 @@ const userSlice = createSlice({
   },
   reducers: {
     addPost: (state, action) => {
-      state.post.push(action.payload);
+      // state.userPost.push(action.payload); //update and array
+      state.userPost = [...state.userPost, action.payload];
     },
-    removePost: (state, action) => {
-      state.post.filter((_, index) => {
-        state.post = index !== action.payload;
+
+    removeuserPost: (state, action) => {
+      state.userPost.filter((_, index) => {
+        state.userPost = index !== action.payload; //returns an new array
       });
     },
   },

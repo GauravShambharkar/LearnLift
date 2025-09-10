@@ -1,9 +1,10 @@
 import { Plus, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import CreatePost from "./CreatePost";
 
 const Dashboard = () => {
-  const { userPost } = useSelector((state) => state.userState);
+  const { userPost } = useSelector((state) => state.userSlice);
   const [post, setPost] = useState(false);
 
   useEffect(() => {
@@ -41,24 +42,7 @@ const Dashboard = () => {
             );
           })}
         </div>
-        {post && (
-          <div className="w-full h-full top-0 right-0 bg-[#ffffff4b] backdrop-blur-[5px]  absolute allcenter z-10">
-            <span
-              onClick={() => setPost(!post)}
-              className="xend absolute top-0 right-0 "
-            >
-              <X className="btn size-7" />
-            </span>
-            <div className="w-150 border border-black flex flex-col">
-              <label htmlFor="">Title</label>
-              <input type="text" />
-              <label htmlFor="">Description</label>
-              <input type="text" />
-              <label htmlFor="">Price</label>
-              <input type="text" />
-            </div>
-          </div>
-        )}
+        {post && <CreatePost post={post} setPost={setPost} />}
       </div>
     </>
   );

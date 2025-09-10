@@ -149,25 +149,25 @@ const Home = () => {
             with LearnLift
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/register">
-                <Button
-                  size="lg"
-                  className=" bg-black rounded-lg cursor-pointer text-white px-8 py-3 text-md font-medium  shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  Start Learnign Today
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
+            <Link to="/register">
+              <Button
+                size="lg"
+                className=" bg-black rounded-lg cursor-pointer text-white px-8 py-3 text-md font-medium  shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                Start Learnign Today
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
 
-              <Link to="/login">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className=" rounded-lg cursor-pointe cursor-pointer hover:border-gray-400 text-gray-700 px-8 py-3 text-lg font-semibold transition-all duration-300"
-                >
-                  LogIn
-                </Button>
-              </Link>
+            <Link to="/login">
+              <Button
+                variant="outline"
+                size="lg"
+                className=" rounded-lg cursor-pointe cursor-pointer hover:border-gray-400 text-gray-700 px-8 py-3 text-lg font-semibold transition-all duration-300"
+              >
+                LogIn
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
